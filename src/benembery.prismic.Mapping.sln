@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "benembery.prismic.Mapping.Core", "benembery.prismic.Mapping.Core\benembery.prismic.Mapping.Core.csproj", "{55E84ECF-99D4-4B5F-ABDF-1EB8B236887B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{30164FBA-6383-4764-ABB4-AB92C58FFE8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "benembery.prismic.Mapping.Tests", "benembery.prismic.Mapping.Tests\benembery.prismic.Mapping.Tests.csproj", "{7BF76F03-7A30-4E6E-A9AA-C94AC0536B71}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55E84ECF-99D4-4B5F-ABDF-1EB8B236887B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55E84ECF-99D4-4B5F-ABDF-1EB8B236887B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55E84ECF-99D4-4B5F-ABDF-1EB8B236887B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55E84ECF-99D4-4B5F-ABDF-1EB8B236887B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BF76F03-7A30-4E6E-A9AA-C94AC0536B71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BF76F03-7A30-4E6E-A9AA-C94AC0536B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BF76F03-7A30-4E6E-A9AA-C94AC0536B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BF76F03-7A30-4E6E-A9AA-C94AC0536B71}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7BF76F03-7A30-4E6E-A9AA-C94AC0536B71} = {30164FBA-6383-4764-ABB4-AB92C58FFE8B}
+	EndGlobalSection
+EndGlobal
