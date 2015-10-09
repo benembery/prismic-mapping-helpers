@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="PrismicChildPropertyAttribute.cs" />
     <Compile Include="PrismicDocumentAttribute.cs" />
     <Compile Include="PrismicFieldAttribute.cs" />
     <Compile Include="PrismicMapper.cs" />

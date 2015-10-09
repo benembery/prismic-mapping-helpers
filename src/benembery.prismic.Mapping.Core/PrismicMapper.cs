@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.CodeDom;
+using System.Linq;
 using System.Reflection;
 using prismic;
 
@@ -44,7 +45,7 @@ namespace benembery.PrismicMapping.Core
 
             if (child != null)
             {
-                property.SetValue(ctx.Destination, child.GetValue(source, ctx, property.PropertyType));
+                property.SetValue(ctx.Destination, child.GetValue(source, ctx.DocumentType));
                 return;
             }
             
