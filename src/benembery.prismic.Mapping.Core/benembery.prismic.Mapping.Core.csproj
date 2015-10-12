@@ -49,12 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="PrismicDateAttribute.cs" />
     <Compile Include="PrismicChildPropertyAttribute.cs" />
     <Compile Include="PrismicDocumentAttribute.cs" />
     <Compile Include="PrismicFieldAttribute.cs" />
     <Compile Include="PrismicMapper.cs" />
     <Compile Include="PrismicMappingContext.cs" />
+    <Compile Include="PrismicSliceZoneAttribute.cs" />
     <Compile Include="PrismicStructuredTextFieldAttribute.cs" />
     <Compile Include="PrismicTextFieldAttribute.cs" />
     <Compile Include="PrismicUidAttribute.cs" />

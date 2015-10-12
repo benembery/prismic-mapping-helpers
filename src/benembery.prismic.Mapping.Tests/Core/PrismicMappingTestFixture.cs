@@ -13,15 +13,7 @@ namespace benembery.PrismicMapping.Tests.Core
     [TestFixture]
     public class PrismicMappingTestFixture
     {
-        private Document GetMockDocument(string type, IDictionary<string, Fragment> fragments, ISet<string> tags = null)
-        {
-            tags = tags ?? new SortedSet<string>();
-            var rand = NAuto.GetRandomString(6, 50, CharacterSetType.Anything, Spaces.None, Casing.Any);
-
-
-            return new Document(rand, rand, type, "http://example.com", tags, new List<string>(), fragments);
-        }
-
+        
         [SetUp]
         public void SetUp()
         {
@@ -118,6 +110,46 @@ namespace benembery.PrismicMapping.Tests.Core
             result.NamedStructuredText.getFirstParagraph().Text.Should().Be(fragment.getFirstParagraph().Text);
         }
 
+        [Test]
+        public void Map_correctly_returns_PrismicDate_value()
+        {
+            var fragment = new Date(DateTime.Now);
+            var fragments = new Dictionary<string, Fragment>
+            {
+                {"test.datetime", fragment}
+            };
+            var document = GetMockDocument("test", fragments);
+            var result = PrismicMapper.Map<TestMappingClass>(document);
+
+            result.DateTime.Should().Be(fragment.Value);
+        }
+
+        [Test]
+        public void Map_correctly_returns_DateTime_MinValue_when_PrismicDate_is_null()
+        {
+            var fragments = new Dictionary<string, Fragment>
+            {
+            };
+            var document = GetMockDocument("test", fragments);
+            var result = PrismicMapper.Map<TestMappingClass>(document);
+
+            result.DateTime.Should().Be(DateTime.MinValue);
+        }
+
+        [Test]
+        public void Map_correctly_returns_PrismicDate_value_for_named_field()
+        {
+            var fragment = new Date(DateTime.Now);
+            var fragments = new Dictionary<string, Fragment>
+            {
+                {"test.datetime_named", fragment}
+            };
+            var document = GetMockDocument("test", fragments);
+            var result = PrismicMapper.Map<TestMappingClass>(document);
+
+            result.NamedDateTime.Should().Be(fragment.Value);
+        }
+
 
         [Test]
         public void Map_correctly_returns_PrismicChildProperty_value()
@@ -147,6 +179,14 @@ namespace benembery.PrismicMapping.Tests.Core
             result.Child.ChildNamedText.Should().Be(fragment.Value);
         }
 
+        private Document GetMockDocument(string type, IDictionary<string, Fragment> fragments, ISet<string> tags = null)
+        {
+            tags = tags ?? new SortedSet<string>();
+            var rand = NAuto.GetRandomString(6, 50, CharacterSetType.Anything, Spaces.None, Casing.Any);
+
+
+            return new Document(rand, rand, type, "http://example.com", tags, new List<string>(), fragments);
+        }
 
         [PrismicDocument("")]
         private class TestMappingClassWithNoDocumentName
@@ -170,6 +210,18 @@ namespace benembery.PrismicMapping.Tests.Core
 
             [PrismicStructuredTextField("structured_text_named")]
             public StructuredText NamedStructuredText { get; set; }
+
+            [PrismicDate]
+            public DateTime DateTime { get; set; }
+
+            [PrismicDate("datetime_named")]
+            public DateTime NamedDateTime { get; set; }
+
+            [PrismicDate]
+            public DateTime? DateTimeNullable { get; set; }
+
+            [PrismicDate("datetime_nullable_named")]
+            public DateTime? NamedDateTimeNullable { get; set; }
 
             [TestChildProperty]
             public TestChildPropertyMappingClass Child { get; set; }
