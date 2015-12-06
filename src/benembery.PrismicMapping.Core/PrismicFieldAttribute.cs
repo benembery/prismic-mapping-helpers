@@ -16,9 +16,9 @@ namespace benembery.PrismicMapping.Core
 
         protected abstract object GetValue(Document document, string documentName, PropertyInfo property);
 
-        public void SetValue<T>(PropertyInfo property, Document source, PrismicMappingContext<T> context) where T : new()
+        public void SetValue<T>(Document source, T destination, PropertyInfo property, PrismicMappingContext<T> context) where T : new()
         {
-            property.SetValue(context.Destination, GetValue(source, context.DocumentType, property));
+            property.SetValue(destination, GetValue(source, context.DocumentType, property));
         }
 
         protected string GetFieldName(string documentName, PropertyInfo property)

@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>benembery.PrismicMapping.Core</id>
-    <version>1.0.0-alpha</version>
+    <version>1.0.1</version>
     <title>Prismic Mapping Core</title>
     <authors>Ben Embery</authors>
     <owners>Ben Embery</owners>

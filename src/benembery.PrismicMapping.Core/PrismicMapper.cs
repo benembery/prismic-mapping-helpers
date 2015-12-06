@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Runtime.Caching;
 using System.Linq;
-using System.Reflection;
 using prismic;
 
 namespace benembery.PrismicMapping.Core
 {
     public static class PrismicMapper
     {
-        private const string keyPrefix =  "PRIMSIC_MAPCTX_";
-
         private static readonly List<object> _cache = new List<object>();
 
         public static T Map<T>(Document source) where T : new()
@@ -28,12 +24,14 @@ namespace benembery.PrismicMapping.Core
 
         private static T Map<T>(Document source, PrismicMappingContext<T> ctx) where T : new()
         {
+            var dest = new T();
+
             foreach (var property in ctx.DestinationMappings)
             {
-                property.Value.SetValue(property.Key, source, ctx);
+                property.Value.SetValue(source, dest, property.Key, ctx);
             }
 
-            return ctx.Destination;
+            return dest;
         }
 
         private static PrismicMappingContext<T> GetContext<T>(string documentName = null) where T: new ()
@@ -44,7 +42,7 @@ namespace benembery.PrismicMapping.Core
                 return ctx;
 
             ctx = new PrismicMappingContext<T>(documentName);
-            CacheContext(ctx, documentName);
+            CacheContext(ctx);
 
             return ctx;
 
@@ -59,7 +57,7 @@ namespace benembery.PrismicMapping.Core
                 : docsOfType.FirstOrDefault();
         }
 
-        private static void CacheContext<T>(PrismicMappingContext<T> ctx, string documentName = null) where T :new()
+        private static void CacheContext<T>(PrismicMappingContext<T> ctx) where T :new()
         {
             _cache.Add(ctx);
         }

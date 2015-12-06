@@ -38,8 +38,6 @@ namespace benembery.PrismicMapping.Core
             DocumentType = docType.Name;
         }
 
-        public T Destination { get { return _destination; } }
-
 
         private static Dictionary<PropertyInfo, PrismicFieldAttribute> GetPropertyMappings(PropertyInfo[] properties)
         {
