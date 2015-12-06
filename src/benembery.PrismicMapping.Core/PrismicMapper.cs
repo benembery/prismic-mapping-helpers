@@ -1,4 +1,5 @@
-﻿using System.CodeDom;
+﻿using System.Collections.Generic;
+using System.Runtime.Caching;
 using System.Linq;
 using System.Reflection;
 using prismic;
@@ -7,54 +8,60 @@ namespace benembery.PrismicMapping.Core
 {
     public static class PrismicMapper
     {
+        private const string keyPrefix =  "PRIMSIC_MAPCTX_";
+
+        private static readonly List<object> _cache = new List<object>();
+
         public static T Map<T>(Document source) where T : new()
         {
-            var ctx = new PrismicMappingContext<T>();
+            var ctx = GetContext<T>();
 
             return Map(source, ctx);
         }
 
         public static T Map<T>(Document source, string documentName) where T : new()
         {
-            var ctx = new PrismicMappingContext<T>(documentName);
+            var ctx = GetContext<T>(documentName);
 
             return Map(source, ctx);
         }
 
         private static T Map<T>(Document source, PrismicMappingContext<T> ctx) where T : new()
         {
-            var destProperties = ctx.DestinationType.GetProperties();
-
-            foreach (var property in destProperties)
+            foreach (var property in ctx.DestinationMappings)
             {
-                property.MapProperty(source, ctx);
+                property.Value.SetValue(property.Key, source, ctx);
             }
 
             return ctx.Destination;
         }
 
-        private static void MapProperty<T>(this PropertyInfo property, Document source, PrismicMappingContext<T> ctx)
-            where T : new()
+        private static PrismicMappingContext<T> GetContext<T>(string documentName = null) where T: new ()
         {
-            var attributes = property.GetCustomAttributes().ToList();
+            var ctx = GetContextFromCache<T>(documentName);
 
-            //if(!attributes.Any())
-            //    return;
+            if (ctx != null)
+                return ctx;
 
-            var child = attributes.OfType<PrismicChildPropertyAttribute>().FirstOrDefault();
+            ctx = new PrismicMappingContext<T>(documentName);
+            CacheContext(ctx, documentName);
 
-            if (child != null)
-            {
-                property.SetValue(ctx.Destination, child.GetValue(source, ctx.DocumentType));
-                return;
-            }
-            
-            var field = attributes.OfType<PrismicFieldAttribute>().FirstOrDefault();
+            return ctx;
 
-            if (field == null)
-                return;
+        }
 
-            property.SetValue(ctx.Destination, field.GetValue(source, ctx.DocumentType, property));
+        private static PrismicMappingContext<T> GetContextFromCache<T>(string documentName = null) where T: new ()
+        {
+            var docsOfType = _cache.OfType<PrismicMappingContext<T>>();
+
+            return !string.IsNullOrWhiteSpace(documentName) 
+                ? docsOfType.FirstOrDefault(x => x.DocumentType == documentName) 
+                : docsOfType.FirstOrDefault();
+        }
+
+        private static void CacheContext<T>(PrismicMappingContext<T> ctx, string documentName = null) where T :new()
+        {
+            _cache.Add(ctx);
         }
     }
 }

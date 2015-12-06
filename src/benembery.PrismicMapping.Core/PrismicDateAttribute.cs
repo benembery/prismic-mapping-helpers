@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Web;
 using prismic;
 
 namespace benembery.PrismicMapping.Core
@@ -12,7 +11,7 @@ namespace benembery.PrismicMapping.Core
         {
         }
 
-        public override object GetValue(Document document, string documentName, PropertyInfo propertyInfo)
+        protected override object GetValue(Document document, string documentName, PropertyInfo propertyInfo)
         {
             var date = document.GetDate(GetFieldName(documentName, propertyInfo));
 

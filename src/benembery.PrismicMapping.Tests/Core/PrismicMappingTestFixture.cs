@@ -243,7 +243,7 @@ namespace benembery.PrismicMapping.Tests.Core
 
         private class TestChildPropertyAttribute : PrismicChildPropertyAttribute
         {
-            public override object GetValue(Document document, string documentType)
+            protected override object GetValue(Document document, string documentType)
             {
                 return GetValue<TestChildPropertyMappingClass>(document, documentType);
             }

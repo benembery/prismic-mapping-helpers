@@ -10,7 +10,7 @@ namespace benembery.PrismicMapping.Core
         {
         }
 
-        public override object GetValue(Document document, string documentName, PropertyInfo propertyInfo)
+        protected override object GetValue(Document document, string documentName, PropertyInfo propertyInfo)
         {
             return document.GetText(GetFieldName(documentName, propertyInfo));
         }

@@ -11,10 +11,11 @@ namespace benembery.PrismicMapping.Core
             : base(name)
         {
         }
-        
-        public override object GetValue(Document document, string documentName, PropertyInfo propertyInfo)
+
+        protected override object GetValue(Document document, string documentName, PropertyInfo propertyInfo)
         {
-            return document.GetStructuredText(GetFieldName(documentName, propertyInfo)) ?? new StructuredText(new List<StructuredText.Block>());
+            return document.GetStructuredText(GetFieldName(documentName, propertyInfo))
+                   ?? new StructuredText(new List<StructuredText.Block>());
         }
     }
 }

@@ -14,17 +14,19 @@ namespace benembery.PrismicMapping.Core
             _name = name;
         }
 
-        public abstract object GetValue(Document document, string documentName, PropertyInfo property);
+        protected abstract object GetValue(Document document, string documentName, PropertyInfo property);
+
+        public void SetValue<T>(PropertyInfo property, Document source, PrismicMappingContext<T> context) where T : new()
+        {
+            property.SetValue(context.Destination, GetValue(source, context.DocumentType, property));
+        }
 
         protected string GetFieldName(string documentName, PropertyInfo property)
         {
             var name = _name;
 
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                if (property != null)
-                    name = property.Name.ToLowerInvariant();
-            }
+            if (string.IsNullOrWhiteSpace(name) && property != null)
+                name = property.Name.ToLowerInvariant();
 
             if (string.IsNullOrWhiteSpace(name))
                 return string.Empty;
