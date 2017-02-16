@@ -44,8 +44,8 @@
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="prismicio, Version=1.0.5742.25414, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\prismicio.1.3.1\lib\net45\prismicio.dll</HintPath>
+    <Reference Include="prismicio, Version=1.0.5891.26969, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\prismicio.1.4.0\lib\net45\prismicio.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

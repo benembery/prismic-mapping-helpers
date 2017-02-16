@@ -28,10 +28,9 @@ namespace benembery.PrismicMapping.Core
             if (string.IsNullOrWhiteSpace(name) && property != null)
                 name = property.Name.ToLowerInvariant();
 
-            if (string.IsNullOrWhiteSpace(name))
-                return string.Empty;
-
-            return string.Format("{0}.{1}", documentName, name);
+            return string.IsNullOrWhiteSpace(name) 
+                ? string.Empty 
+                : string.Format("{0}.{1}", documentName, name);
         }
     }
 }

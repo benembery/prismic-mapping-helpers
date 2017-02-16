@@ -13,7 +13,7 @@ namespace benembery.PrismicMapping.Benchmark
 {
     internal class Program
     {
-        private static int iterations = 100;
+        private static int iterations = 100000;
 
         private static void Main(string[] args)
         {
