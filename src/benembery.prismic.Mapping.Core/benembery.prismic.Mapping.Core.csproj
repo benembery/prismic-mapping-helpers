@@ -2,9 +2,11 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.4;net45</TargetFrameworks>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>2.0.0-alpha</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="prismicio" Version="1.5.0-*" />
+    <PackageReference Include="prismicio" Version="1.5.0-alpha" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard1.4'">
     <PackageReference Include="System.Reflection.TypeExtensions">
