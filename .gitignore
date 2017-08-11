@@ -138,6 +138,7 @@ publish/
 
 # NuGet Packages
 packages/*
+!packages/prismic*
 *.nupkg
 ## TODO: If the tool you use requires repositories.config
 ## uncomment the next line
